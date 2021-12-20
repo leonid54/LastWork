@@ -10,18 +10,15 @@ final class ConvertPresenter: IConvertPresenter {
 
     init(view: ConvertView) {
         self.view = view
-        self.loadData(url: "")
-//        self.view?.onTouchedHandler = { [weak self] model in
-//            self?.loadData(url: model)
-//        }
+        self.loadData(url: "", baseCurrency: "RUB")
     }
     
     func onViewReady() {
         self.view?.setupInitialState()
     }
     
-    func loadData(url: String) {
-        self.networkService.loadData {  (result: Result<Currency, Error>) in
+    func loadData(url: String, baseCurrency: String) {
+        self.networkService.loadData(url: "https://freecurrencyapi.net/api/v2/latest?apikey=4a16fbf0-5bf6-11ec-a4ff-0dc3c805f898&base_currency=" + "\(baseCurrency)") {  (result: Result<Currency, Error>) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
@@ -41,8 +38,7 @@ final class ConvertPresenter: IConvertPresenter {
             case .failure(let error):
                 print("[NETWORK] error is: \(error)")
                 DispatchQueue.main.async {
-                    print("errroooor")
-//                    self.view?.setLabel(text: "Загрузка закончена с ошибкой \(error.localizedDescription)")
+                    print("error")
                 }
             }
         }

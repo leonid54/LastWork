@@ -1,7 +1,7 @@
 import UIKit
 
 protocol INetworkService {
-    func loadData<T: Decodable>(completion: @escaping (Result<T, Error>) -> Void)
+    func loadData<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void)
 }
 
 final class NetworkService: NSObject, INetworkService {
@@ -17,8 +17,8 @@ final class NetworkService: NSObject, INetworkService {
         }
     }
 
-    func loadData<T: Decodable>(completion: @escaping (Result<T, Error>) -> Void) {
-        guard let url = URL(string: "https://freecurrencyapi.net/api/v2/latest?apikey=4a16fbf0-5bf6-11ec-a4ff-0dc3c805f898") else { assert(false, "Кривой УРЛ") }
+    func loadData<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
+        guard let url = URL(string: url) else { assert(false, "Non url") }
 
         let request = URLRequest(url: url)
         self.session.dataTask(with: request) { data, response, error in

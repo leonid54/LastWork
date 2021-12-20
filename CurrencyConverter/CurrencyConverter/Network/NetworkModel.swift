@@ -1,7 +1,7 @@
 import UIKit
 
 struct Currency: Codable {
-//    let query: Query
+    let query: Query
     let data: [String: Double]
 }
 

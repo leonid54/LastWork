@@ -15,7 +15,8 @@ final class ConvertView: UIViewController {
     private let scrollView = UIScrollView()
     private let convertTextField = UITextField()
     private let convertButton = UIButton()
-     let pickView = UIPickerView()
+    private let atPickView = UIPickerView()
+    private let toPickView = UIPickerView()
     private let convertLabel = UILabel()
     var currency:[String] = []
     var values:[Double] = []
@@ -44,22 +45,25 @@ private extension ConvertView {
         
         self.contentView.addSubview(self.convertTextField)
         self.contentView.addSubview(self.convertButton)
-        self.contentView.addSubview(self.pickView)
+        self.contentView.addSubview(self.atPickView)
+        self.contentView.addSubview(self.toPickView)
         self.contentView.addSubview(self.convertLabel)
     }
     
     private func addDelegate() {
-        self.pickView.dataSource = self
-        self.pickView.delegate = self
+        self.atPickView.dataSource = self
+        self.atPickView.delegate = self
+        self.toPickView.dataSource = self
+        self.toPickView.delegate = self
     }
     
     private func setConfig() {
-        self.convertTextField.placeholder = "USD"
+        self.convertTextField.placeholder = "Currency"
         
         self.convertButton.setTitle("Convert", for: .normal)
         self.convertButton.addTarget(self, action: #selector(self.getConvert), for: .touchDown)
         self.convertButton.backgroundColor = .blue
-        self.convertLabel.text = "100"
+        self.convertLabel.text = "0"
     }
     
     private func setConstraint() {
@@ -88,14 +92,20 @@ private extension ConvertView {
             make.right.equalToSuperview().offset(-10)
         }
         
-        self.pickView.snp.makeConstraints { (make) in
+        self.atPickView.snp.makeConstraints { (make) in
             make.top.equalTo(self.convertButton.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
+            make.left.equalToSuperview()
+            make.right.equalTo(self.toPickView.snp.left)
+        }
+        
+        self.toPickView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.convertButton.snp.bottom).offset(20)
+            make.left.equalTo(self.atPickView.snp.right)
+            make.right.equalToSuperview()
         }
         
         self.convertLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.pickView.snp.bottom).offset(20)
+            make.top.equalTo(self.toPickView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
         }
@@ -126,17 +136,17 @@ extension ConvertView: UIPickerViewDelegate {
 
 extension ConvertView: IConvertView {
     func refreshPickView() {
-        self.pickView.reloadAllComponents()
+        self.atPickView.reloadAllComponents()
+        self.toPickView.reloadAllComponents()
     }
     
     @objc func getConvert() {
         if self.convertTextField.text != "" {
             self.convertLabel.text = String(Double(self.convertTextField.text!)! * self.activeCurrency)
-
         }
     }
     
     func setupInitialState() {
-        self.title = "123"
+        self.title = "Currency Converter"
     }
 }
