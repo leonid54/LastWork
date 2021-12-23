@@ -7,31 +7,42 @@ protocol IConvertPresenter {
 final class ConvertPresenter: IConvertPresenter {
     private weak var view: ConvertView?
     private var networkService = NetworkService()
+    private var baseCurrency = ""
 
     init(view: ConvertView) {
         self.view = view
-        self.loadData(url: "", baseCurrency: "RUB")
+        self.view?.onTouchHandler = { [weak self] model in
+            self?.loadData(baseCurrency: "\(model)")
+        }
+        self.loadData(baseCurrency: "\(self.baseCurrency)")
     }
     
     func onViewReady() {
         self.view?.setupInitialState()
     }
     
-    func loadData(url: String, baseCurrency: String) {
+    func loadData(baseCurrency: String) {
         self.networkService.loadData(url: "https://freecurrencyapi.net/api/v2/latest?apikey=4a16fbf0-5bf6-11ec-a4ff-0dc3c805f898&base_currency=" + "\(baseCurrency)") {  (result: Result<Currency, Error>) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    print("все окей")
+                    print("Success")
                     print("\(data)")
+//                    ConvertView.currency.removeAll()
+//                    ConvertView.values.removeAll()
+                    
                     if let rates = data.data as? NSDictionary {
                         for (key, value) in rates {
-                            self.view?.currency.append(key as? String ?? "")
-                            self.view?.values.append(value as? Double ?? 0)
+                            ConvertView.currencies.updateValue(value as? Double ?? 0, forKey: key as? String ?? "")
+                            self.view?.setCurrency()
+                            self.view?.refreshPickView()
+
+//                            ConvertView.currency.append(key as? String ?? "")
+//                            ConvertView.values.append(value as? Double ?? 0)
                         }
-                        print(self.view?.currency)
-                        print(self.view?.values)
-                        self.view?.refreshPickView()
+                        print(ConvertView.currencies)
+                        print(ConvertView.currency)
+                        print(ConvertView.values)
 
                     }
                 }
