@@ -51,17 +51,17 @@ extension BasePickerView: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ConvertView.currency.count
+        return DataArray.currency.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.onBaseCurrency?(ConvertView.currency[row])
-        return ConvertView.currency[row]
+        self.onBaseCurrency?(DataArray.currency[row])
+        return DataArray.currency[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //        ConvertView.activeCurrency = ConvertView.values[row]
-        self.onSelectedCurrency?(ConvertView.currency[row])
+        self.onSelectedCurrency?(DataArray.currency[row])
     }
 }
 

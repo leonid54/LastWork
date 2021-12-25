@@ -9,7 +9,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DataStorage.setConfig()
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        let vc = ConvertView()
+        let vc = ConvertAssembly.makeModule()
         let navVC = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = navVC
         self.window?.makeKeyAndVisible()

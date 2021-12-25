@@ -3,22 +3,22 @@ import SnapKit
 import RealmSwift
 
 protocol IDataBaseView: AnyObject {
-    func setupInitialState()
+    func setData(model: DataStorage)
 }
 
-final class DataBaseView: UIViewController {
-    private lazy var presenter: DataBasePresenter = {
-        return DataBasePresenter(view: self)
-    }()
+final class DataBaseView: UIView {
     private var tableView: UITableView = UITableView()
     let realm = try! Realm()
-    var items: Results<ConversionInfo>!
+ // как сделать по-другому???
+    var items: Results<ConversionInfo>! // как сделать по-другому???
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.configure()
-        self.presenter.onViewReady()
         self.items = realm.objects(ConversionInfo.self)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setModel(number: String, base: String, result: String, convert: String) {
@@ -32,6 +32,12 @@ final class DataBaseView: UIViewController {
             self.realm.add(task)
         }
     }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.configure()
+//        self.presenter.onViewReady()
+//        self.items = realm.objects(ConversionInfo.self)
+//    }
     
 }
 
@@ -45,7 +51,7 @@ private extension DataBaseView {
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.tableView)
+        self.addSubview(self.tableView)
     }
 
     private func addDelegate() {
@@ -54,7 +60,7 @@ private extension DataBaseView {
     }
     
     private func setConfig() {
-        self.view.backgroundColor = .white
+        self.backgroundColor = .white
         self.tableView.showsVerticalScrollIndicator = false
     }
 
@@ -78,8 +84,8 @@ extension DataBaseView: UITableViewDelegate {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { _,_ in
             try! self.realm.write {
                 self.realm.delete(editingRow)
-                tableView.reloadData()
             }
+            tableView.reloadData()
         }
         return [deleteAction]
     }
@@ -102,11 +108,13 @@ extension DataBaseView: UITableViewDataSource {
         cell.resultLabel.text = item.resultOfConversion
         cell.conversionCurrencyLabel.text = item.convertCurrency
         return cell
+        
     }
 }
 
 extension DataBaseView: IDataBaseView {
-    func setupInitialState() {
-        self.title = "Conversion info"
+
+    func setData(model: DataStorage) {
+//        let realm = model.realm
     }
 }

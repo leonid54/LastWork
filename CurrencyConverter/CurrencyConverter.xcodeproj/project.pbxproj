@@ -26,6 +26,13 @@
 		1DD253AD2775B55500BE4913 /* DataBaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253AC2775B55500BE4913 /* DataBaseViewCell.swift */; };
 		1DD253B627773E8F00BE4913 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253B527773E8F00BE4913 /* Localization.swift */; };
 		1DD253BB27773ED300BE4913 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DD253BD27773ED300BE4913 /* Localizable.strings */; };
+		1DD253C127776D5400BE4913 /* DataBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253C027776D5400BE4913 /* DataBaseViewController.swift */; };
+		1DD253C92777702000BE4913 /* ConvertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253C82777702000BE4913 /* ConvertViewController.swift */; };
+		1DD253CD2777793E00BE4913 /* ConvertAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253CC2777793E00BE4913 /* ConvertAssembly.swift */; };
+		1DD253D227777B2300BE4913 /* DataArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253D127777B2300BE4913 /* DataArray.swift */; };
+		1DD253D627777CD300BE4913 /* ConvertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253D527777CD300BE4913 /* ConvertRouter.swift */; };
+		1DD253DA277784AB00BE4913 /* DataBaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253D9277784AB00BE4913 /* DataBaseAssembly.swift */; };
+		1DD253DE2777873800BE4913 /* DataBaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD253DD2777873800BE4913 /* DataBaseRouter.swift */; };
 		1DFE92EF276CE2460018FEA2 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1DFE92EE276CE2460018FEA2 /* Realm */; };
 		1DFE92F1276CE2460018FEA2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1DFE92F0276CE2460018FEA2 /* RealmSwift */; };
 		1DFE92F7276CE4840018FEA2 /* DataBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE92F6276CE4840018FEA2 /* DataBaseView.swift */; };
@@ -54,6 +61,13 @@
 		1DD253B527773E8F00BE4913 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		1DD253BC27773ED300BE4913 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1DD253BE27773ED700BE4913 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1DD253C027776D5400BE4913 /* DataBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseViewController.swift; sourceTree = "<group>"; };
+		1DD253C82777702000BE4913 /* ConvertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertViewController.swift; sourceTree = "<group>"; };
+		1DD253CC2777793E00BE4913 /* ConvertAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertAssembly.swift; sourceTree = "<group>"; };
+		1DD253D127777B2300BE4913 /* DataArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataArray.swift; sourceTree = "<group>"; };
+		1DD253D527777CD300BE4913 /* ConvertRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertRouter.swift; sourceTree = "<group>"; };
+		1DD253D9277784AB00BE4913 /* DataBaseAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAssembly.swift; sourceTree = "<group>"; };
+		1DD253DD2777873800BE4913 /* DataBaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseRouter.swift; sourceTree = "<group>"; };
 		1DFE92F6276CE4840018FEA2 /* DataBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				1D44A8642768BAC7008F758B /* Flow */,
+				1DD253D027777AFE00BE4913 /* Data */,
 				1D72FDDB2770E33900B6E21C /* Module */,
 				1DD253952770E41500BE4913 /* Network */,
 				1D72FDD52770E30100B6E21C /* Resources */,
@@ -133,8 +148,11 @@
 		1DD253862770E3B900BE4913 /* ConverterView */ = {
 			isa = PBXGroup;
 			children = (
-				1DD253882770E3B900BE4913 /* ConvertView.swift */,
+				1DD253CC2777793E00BE4913 /* ConvertAssembly.swift */,
+				1DD253D527777CD300BE4913 /* ConvertRouter.swift */,
 				1DD2538A2770E3B900BE4913 /* ConvertPresenter.swift */,
+				1DD253C82777702000BE4913 /* ConvertViewController.swift */,
+				1DD253882770E3B900BE4913 /* ConvertView.swift */,
 				1DD253872770E3B900BE4913 /* BasePickerView.swift */,
 				1DD2538C2770E3B900BE4913 /* ConvertPickerView.swift */,
 			);
@@ -150,14 +168,25 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		1DD253D027777AFE00BE4913 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1DD253A42775B4B400BE4913 /* DataBaseModel.swift */,
+				1DD253A12775B43700BE4913 /* DataStorage.swift */,
+				1DD253D127777B2300BE4913 /* DataArray.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		1DFE92F5276CE4460018FEA2 /* DataBaseView */ = {
 			isa = PBXGroup;
 			children = (
+				1DD253D9277784AB00BE4913 /* DataBaseAssembly.swift */,
+				1DD253DD2777873800BE4913 /* DataBaseRouter.swift */,
 				1DD253A82775B4C600BE4913 /* DataBasePresenter.swift */,
+				1DD253C027776D5400BE4913 /* DataBaseViewController.swift */,
 				1DFE92F6276CE4840018FEA2 /* DataBaseView.swift */,
 				1DD253AC2775B55500BE4913 /* DataBaseViewCell.swift */,
-				1DD253A12775B43700BE4913 /* DataStorage.swift */,
-				1DD253A42775B4B400BE4913 /* DataBaseModel.swift */,
 			);
 			path = DataBaseView;
 			sourceTree = "<group>";
@@ -246,17 +275,24 @@
 				1DD2539D2770E49F00BE4913 /* Metrics.swift in Sources */,
 				1DD2538F2770E3BA00BE4913 /* NetworkModel.swift in Sources */,
 				1DD253912770E3BA00BE4913 /* Network.swift in Sources */,
+				1DD253D627777CD300BE4913 /* ConvertRouter.swift in Sources */,
+				1DD253CD2777793E00BE4913 /* ConvertAssembly.swift in Sources */,
 				1DD2538E2770E3BA00BE4913 /* ConvertView.swift in Sources */,
 				1DD253B627773E8F00BE4913 /* Localization.swift in Sources */,
+				1DD253DE2777873800BE4913 /* DataBaseRouter.swift in Sources */,
+				1DD253C127776D5400BE4913 /* DataBaseViewController.swift in Sources */,
 				1DD253922770E3BA00BE4913 /* ConvertPickerView.swift in Sources */,
 				1DFE92F7276CE4840018FEA2 /* DataBaseView.swift in Sources */,
 				1DD253902770E3BA00BE4913 /* ConvertPresenter.swift in Sources */,
 				1DD253A22775B43700BE4913 /* DataStorage.swift in Sources */,
 				1DD253A92775B4C600BE4913 /* DataBasePresenter.swift in Sources */,
 				1DD253AD2775B55500BE4913 /* DataBaseViewCell.swift in Sources */,
+				1DD253DA277784AB00BE4913 /* DataBaseAssembly.swift in Sources */,
+				1DD253C92777702000BE4913 /* ConvertViewController.swift in Sources */,
 				1DD253A52775B4B400BE4913 /* DataBaseModel.swift in Sources */,
 				1D44A84727686BB8008F758B /* SceneDelegate.swift in Sources */,
 				1DD2538D2770E3BA00BE4913 /* BasePickerView.swift in Sources */,
+				1DD253D227777B2300BE4913 /* DataArray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

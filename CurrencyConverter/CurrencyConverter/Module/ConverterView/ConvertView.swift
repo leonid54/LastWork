@@ -2,17 +2,15 @@ import UIKit
 import SnapKit
 
 protocol IConvertView: AnyObject {
-    func setupInitialState()
     func getConvert()
     func refreshPickView()
     func setCurrency()
     func getInfo()
+    var onTouchHandler: ((String) -> Void)? { get set }
+    var onInfoButtonHandler: (() -> Void)? { get set }
 }
 
-final class ConvertView: UIViewController {
-    private lazy var presenter: IConvertPresenter = {
-           return ConvertPresenter(view: self)
-       }()
+final class ConvertView: UIView {
     private let contentView = UIView()
     private let scrollView = UIScrollView()
     private let convertTextField = UITextField()
@@ -27,15 +25,12 @@ final class ConvertView: UIViewController {
     private let baseСurrencyLabel = UILabel()
     private let conversionСurrencyLabel = UILabel()
     var onTouchHandler: ((String) -> Void)?
-    static var currencies: [String: Double] = [:]
-    static var currency:[String] = [] // возможно вынести в отдельный файл
-    static var values:[Double] = [] // возможно вынести в отдельный файл
-    static var activeCurrency: Double = 0.0
+    var onInfoButtonHandler: (() -> Void)?
     private var baseModel: String?
     private var convertModel: String?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.configure()
         self.convertPickerView.onConvertCurrency = { [weak self] model in
             self?.convertModel = model
@@ -46,7 +41,9 @@ final class ConvertView: UIViewController {
         self.basePickerView.onSelectedCurrency = { [weak self] model in
             self?.onTouchHandler?(model)
         }
-        self.presenter.onViewReady()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -64,7 +61,7 @@ private extension ConvertView {
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.scrollView)
+        self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.contentView)
         
         self.contentView.addSubview(self.convertTextField)
@@ -81,13 +78,11 @@ private extension ConvertView {
     }
     
     private func setConfig() {
-        self.view.backgroundColor = .white
+        self.backgroundColor = .white
         
         self.convertTextField.placeholder = "Number"
         self.convertTextField.borderStyle = .roundedRect
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
+                
         self.convertButton.setTitle("Convert", for: .normal)
         self.convertButton.addTarget(self, action: #selector(self.getConvert), for: .touchDown)
         self.convertButton.backgroundColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
@@ -137,7 +132,7 @@ private extension ConvertView {
         }
         
         self.convertTextField.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(60)
+            make.top.equalToSuperview().offset(100)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
         }
@@ -210,11 +205,11 @@ private extension ConvertView {
 
 extension ConvertView: IConvertView {
     func setCurrency() {
-        ConvertView.currency.removeAll()
-        ConvertView.values.removeAll()
-        for (key, value) in ConvertView.currencies {
-            ConvertView.currency.append(key)
-            ConvertView.values.append(value)
+        DataArray.currency.removeAll()
+        DataArray.values.removeAll()
+        for (key, value) in DataArray.currencies {
+            DataArray.currency.append(key)
+            DataArray.values.append(value)
         }
     }
     
@@ -236,10 +231,10 @@ extension ConvertView: IConvertView {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             if self.convertTextField.text != "" {
-                self.convertLabel.text = String(Double(self.convertTextField.text!)! * ConvertView.activeCurrency)
-                dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result:self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
+                self.convertLabel.text = String(Double(self.convertTextField.text!)! * DataArray.activeCurrency)
             }
         }
+        dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result:self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
     }
     
     @objc func getInfo() {
@@ -250,13 +245,8 @@ extension ConvertView: IConvertView {
         UIView.animate(withDuration: 0.5) {
             self.conversionInfoButton.alpha = 1
         }
-        let dataBase = DataBaseView()
-        self.navigationController?.pushViewController(dataBase, animated: true)
-    }
-    
-    func setupInitialState() {
-        self.title = "Currency Converter"
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
+        
+        self.onInfoButtonHandler?()
     }
 }
 

@@ -27,8 +27,6 @@ private extension DataBaseViewCell {
     private func setContent() {
         self.toLabel.text = "="
         self.toLabel.textColor = .black
-        
-        self.numberLabel.numberOfLines = 2
     }
 
     private func setConstraint() {
