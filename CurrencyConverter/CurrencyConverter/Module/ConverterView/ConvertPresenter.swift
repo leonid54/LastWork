@@ -12,7 +12,7 @@ final class ConvertPresenter: IConvertPresenter {
     init(view: ConvertView) {
         self.view = view
         self.view?.onTouchHandler = { [weak self] model in
-            self?.loadData(baseCurrency: "\(model)")
+            self?.loadData(baseCurrency: "\(model)") // ПЕРЕНЕСТИ ВЫЗОВ ЗАПРОСА ЧЕРЕЗ КНОПКУ CONVERT???? возможно данные не успевают приходить
         }
         self.loadData(baseCurrency: "\(self.baseCurrency)")
     }
@@ -28,22 +28,17 @@ final class ConvertPresenter: IConvertPresenter {
                 DispatchQueue.main.async {
                     print("Success")
                     print("\(data)")
-//                    ConvertView.currency.removeAll()
-//                    ConvertView.values.removeAll()
-                    
+            
                     if let rates = data.data as? NSDictionary {
                         for (key, value) in rates {
                             ConvertView.currencies.updateValue(value as? Double ?? 0, forKey: key as? String ?? "")
                             self.view?.setCurrency()
                             self.view?.refreshPickView()
-
-//                            ConvertView.currency.append(key as? String ?? "")
-//                            ConvertView.values.append(value as? Double ?? 0)
                         }
                         print(ConvertView.currencies)
                         print(ConvertView.currency)
                         print(ConvertView.values)
-
+                        
                     }
                 }
             case .failure(let error):
