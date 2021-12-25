@@ -5,7 +5,7 @@ protocol IDataBasePresenter {
 }
 
 final class DataBasePresenter {
-//    private var model = IDataStorage()
+    private var model = DataStorage()
     private weak var view: IDataBaseView?
 
     init(view: IDataBaseView) {

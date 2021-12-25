@@ -1,9 +1,6 @@
 import UIKit
 import RealmSwift
 
-protocol IDataStorage: AnyObject {
-}
-
 final class DataStorage {
     let realm = try! Realm()
     var items: Results<ConversionInfo>!
@@ -25,9 +22,4 @@ final class DataStorage {
         _ = try! Realm()
     }
 }
-
-extension DataStorage: IDataStorage {
-    
-}
-
 

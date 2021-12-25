@@ -2,8 +2,9 @@ import UIKit
 import SnapKit
 
 final class ConvertPickerView: UIView {
-     let pickerView = UIPickerView()
-    
+    let pickerView = UIPickerView()
+    var onConvertCurrency: ((String) -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configure()
@@ -50,13 +51,11 @@ extension ConvertPickerView: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return ConvertView.currency.count
-//        return ConvertView.currencies.keys.count ?? 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.onConvertCurrency?(ConvertView.currency[row])
         return ConvertView.currency[row]
-//        return ConvertView.currencies.keys
-
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

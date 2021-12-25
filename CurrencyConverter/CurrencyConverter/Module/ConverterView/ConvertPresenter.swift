@@ -12,7 +12,7 @@ final class ConvertPresenter: IConvertPresenter {
     init(view: ConvertView) {
         self.view = view
         self.view?.onTouchHandler = { [weak self] model in
-            self?.loadData(baseCurrency: "\(model)") // ПЕРЕНЕСТИ ВЫЗОВ ЗАПРОСА ЧЕРЕЗ КНОПКУ CONVERT???? возможно данные не успевают приходить
+            self?.loadData(baseCurrency: "\(model)")
         }
         self.loadData(baseCurrency: "\(self.baseCurrency)")
     }
@@ -35,10 +35,6 @@ final class ConvertPresenter: IConvertPresenter {
                             self.view?.setCurrency()
                             self.view?.refreshPickView()
                         }
-                        print(ConvertView.currencies)
-                        print(ConvertView.currency)
-                        print(ConvertView.values)
-                        
                     }
                 }
             case .failure(let error):

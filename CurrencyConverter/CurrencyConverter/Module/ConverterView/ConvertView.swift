@@ -31,10 +31,18 @@ final class ConvertView: UIViewController {
     static var currency:[String] = [] // возможно вынести в отдельный файл
     static var values:[Double] = [] // возможно вынести в отдельный файл
     static var activeCurrency: Double = 0.0
-
+    private var baseModel: String?
+    private var convertModel: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configure()
+        self.convertPickerView.onConvertCurrency = { [weak self] model in
+            self?.convertModel = model
+        }
+        self.basePickerView.onBaseCurrency = { [weak self] model in
+            self?.baseModel = model
+        }
         self.basePickerView.onSelectedCurrency = { [weak self] model in
             self?.onTouchHandler?(model)
         }
@@ -211,11 +219,13 @@ extension ConvertView: IConvertView {
     }
     
     func refreshPickView() {
-        self.basePickerView.pickerView.reloadAllComponents() // исправить
-        self.convertPickerView.pickerView.reloadAllComponents() // исправить
+        self.basePickerView.pickerView.reloadAllComponents()
+        self.convertPickerView.pickerView.reloadAllComponents()
     }
     
     @objc func getConvert() {
+        let dataBase = DataBaseView()
+
         UIView.animate(withDuration: 0.5) {
             self.convertButton.alpha = 0.5
         }
@@ -227,6 +237,7 @@ extension ConvertView: IConvertView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             if self.convertTextField.text != "" {
                 self.convertLabel.text = String(Double(self.convertTextField.text!)! * ConvertView.activeCurrency)
+                dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result:self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
             }
         }
     }
@@ -245,6 +256,7 @@ extension ConvertView: IConvertView {
     
     func setupInitialState() {
         self.title = "Currency Converter"
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
     }
 }
 

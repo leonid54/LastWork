@@ -2,8 +2,9 @@ import UIKit
 import SnapKit
 
 final class BasePickerView: UIView {
-     let pickerView = UIPickerView()
-     var onSelectedCurrency: ((String) -> Void)?
+    let pickerView = UIPickerView()
+    var onSelectedCurrency: ((String) -> Void)?
+    var onBaseCurrency: ((String) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +55,7 @@ extension BasePickerView: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.onBaseCurrency?(ConvertView.currency[row])
         return ConvertView.currency[row]
     }
     
