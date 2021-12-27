@@ -22,6 +22,6 @@ final class DataBaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Conversion info"
+        self.title = l10n("BASE_VIEW_CONTROLLER_TITLE")
     }
 }

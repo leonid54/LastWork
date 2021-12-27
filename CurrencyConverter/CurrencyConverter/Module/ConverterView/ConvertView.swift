@@ -81,15 +81,15 @@ private extension ConvertView {
     private func setConfig() {
         self.backgroundColor = .white
         
-        self.convertTextField.placeholder = "Number"
+        self.convertTextField.placeholder = l10n("CONVERT_VIEW_CONVERT_TEXT_FIELD")
         self.convertTextField.borderStyle = .roundedRect
                 
-        self.convertButton.setTitle("Convert", for: .normal)
+        self.convertButton.setTitle(l10n("CONVERT_VIEW_CONVERT_BUTTON"), for: .normal)
         self.convertButton.addTarget(self, action: #selector(self.getConvert), for: .touchDown)
         self.convertButton.backgroundColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
         self.convertButton.layer.cornerRadius = 15
 
-        self.conversionInfoButton.setTitle("Get conversion info", for: .normal)
+        self.conversionInfoButton.setTitle(l10n("CONVERT_VIEW_CONVERT_INFO_BUTTON"), for: .normal)
         self.conversionInfoButton.addTarget(self, action: #selector(self.getInfo), for: .touchDown)
         self.conversionInfoButton.backgroundColor = UIColor(red: 0.557, green: 0.557, blue: 0.576, alpha: 1)
         self.conversionInfoButton.layer.cornerRadius = 15
@@ -97,22 +97,22 @@ private extension ConvertView {
         self.convertLabel.text = "0"
         
         self.toLabel.textColor = .black
-        self.toLabel.text = "to"
+        self.toLabel.text = l10n("CONVERT_VIEW_TO_LABEL")
         self.toLabel.textAlignment = .center
         self.toLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
         
         self.baseСurrencyLabel.textColor = .black
-        self.baseСurrencyLabel.text = "Base"
+        self.baseСurrencyLabel.text = l10n("CONVERT_VIEW_BASE_CURRENCY_LABEL")
         self.baseСurrencyLabel.textAlignment = .center
         self.baseСurrencyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
         
         self.conversionСurrencyLabel.textColor = .black
-        self.conversionСurrencyLabel.text = "Conversion"
+        self.conversionСurrencyLabel.text = l10n("CONVERT_VIEW_CONVERSION_LABEL")
         self.conversionСurrencyLabel.textAlignment = .center
         self.conversionСurrencyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
         
         self.resultLabel.textColor = .black
-        self.resultLabel.text = "Result:"
+        self.resultLabel.text = l10n("CONVERT_VIEW_RESULT_LABEL")
         self.resultLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.semibold)
         
         self.lineView.backgroundColor = UIColor(red: 0.557, green: 0.557, blue: 0.576, alpha: 1)

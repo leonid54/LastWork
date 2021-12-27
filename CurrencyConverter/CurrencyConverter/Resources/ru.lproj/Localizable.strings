@@ -1,1 +1,11 @@
-"" = "";
+"CONVERT_VIEW_CONVERT_TEXT_FIELD" = "Количество";
+"CONVERT_VIEW_CONVERT_BUTTON" = "Конвертировать";
+"CONVERT_VIEW_CONVERT_INFO_BUTTON" = "Информация о конвертации";
+"CONVERT_VIEW_TO_LABEL" = "в";
+"CONVERT_VIEW_BASE_CURRENCY_LABEL" = "Базовая";
+"CONVERT_VIEW_CONVERSION_LABEL" = "Конвертируемая";
+"CONVERT_VIEW_RESULT_LABEL" = "Результат:";
+"CONVERT_VIEW_CONTROLLER_TITLE" = "Конвертер валют";
+"CONVERT_VIEW_CONTROLLER_BACK_BUTTON" = "Назад";
+"BASE_VIEW_DELETE_BUTTON" = "Удалить";
+"BASE_VIEW_CONTROLLER_TITLE" = "Конвертации";

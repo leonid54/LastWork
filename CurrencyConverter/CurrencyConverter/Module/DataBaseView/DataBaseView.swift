@@ -72,7 +72,7 @@ extension DataBaseView: UITableViewDelegate {
 
         let editingRow = items[indexPath.row]
 
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { _,_ in
+        let deleteAction = UITableViewRowAction(style: .default, title: l10n("BASE_VIEW_DELETE_BUTTON")) { _,_ in
             try! self.realm.write {
                 self.realm.delete(editingRow)
             }
