@@ -1,10 +1,15 @@
 import UIKit
 import SnapKit
 
+protocol IBasePickerView {
+    func setModel(model: DataArray)
+}
+
 final class BasePickerView: UIView {
     let pickerView = UIPickerView()
     var onSelectedCurrency: ((String) -> Void)?
     var onBaseCurrency: ((String) -> Void)?
+    private var baseViewModel: DataArray?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,19 +56,24 @@ extension BasePickerView: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return DataArray.currency.count
+        return self.baseViewModel?.currency?.count ?? 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.onBaseCurrency?(DataArray.currency[row])
-        return DataArray.currency[row]
+        self.onBaseCurrency?(self.baseViewModel?.currency?[row] ?? "")
+        return self.baseViewModel?.currency?[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        ConvertView.activeCurrency = ConvertView.values[row]
-        self.onSelectedCurrency?(DataArray.currency[row])
+        self.onSelectedCurrency?(self.baseViewModel?.currency?[row] ?? "")
     }
 }
 
 extension BasePickerView: UIPickerViewDelegate {
+}
+
+extension BasePickerView: IBasePickerView {
+    func setModel(model: DataArray) {
+        self.baseViewModel = model
+    }
 }

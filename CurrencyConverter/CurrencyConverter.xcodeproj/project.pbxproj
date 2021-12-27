@@ -105,9 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				1D44A8642768BAC7008F758B /* Flow */,
-				1DD253D027777AFE00BE4913 /* Data */,
 				1D72FDDB2770E33900B6E21C /* Module */,
 				1DD253952770E41500BE4913 /* Network */,
+				1DD253D027777AFE00BE4913 /* Data */,
 				1D72FDD52770E30100B6E21C /* Resources */,
 				1D44A85527686BBC008F758B /* Info.plist */,
 			);

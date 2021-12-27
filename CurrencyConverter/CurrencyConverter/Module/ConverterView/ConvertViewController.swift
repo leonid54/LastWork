@@ -16,6 +16,7 @@ final class ConvertViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        self.view = self.convertView as! UIView
         self.convertPresenter.loadView(controller: self, view: self.convertView)
     }
     
@@ -23,10 +24,7 @@ final class ConvertViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Currency Converter"
         self.navigationController?.navigationBar.tintColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
+        self.navigationItem.backButtonTitle = "Back"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.view.addSubview(convertView as! UIView)
     }
 }

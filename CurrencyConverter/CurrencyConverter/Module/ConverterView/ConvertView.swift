@@ -4,7 +4,7 @@ import SnapKit
 protocol IConvertView: AnyObject {
     func getConvert()
     func refreshPickView()
-    func setCurrency()
+    func setCurrency(model: DataArray)
     func getInfo()
     var onTouchHandler: ((String) -> Void)? { get set }
     var onInfoButtonHandler: (() -> Void)? { get set }
@@ -28,6 +28,7 @@ final class ConvertView: UIView {
     var onInfoButtonHandler: (() -> Void)?
     private var baseModel: String?
     private var convertModel: String?
+    private var viewModel: DataArray?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -132,7 +133,7 @@ private extension ConvertView {
         }
         
         self.convertTextField.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(60)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
         }
@@ -204,13 +205,10 @@ private extension ConvertView {
 }
 
 extension ConvertView: IConvertView {
-    func setCurrency() {
-        DataArray.currency.removeAll()
-        DataArray.values.removeAll()
-        for (key, value) in DataArray.currencies {
-            DataArray.currency.append(key)
-            DataArray.values.append(value)
-        }
+    func setCurrency(model: DataArray) {
+        self.viewModel = model
+        self.basePickerView.setModel(model: model)
+        self.convertPickerView.setModel(model: model)
     }
     
     func refreshPickView() {
@@ -229,12 +227,10 @@ extension ConvertView: IConvertView {
             self.convertButton.alpha = 1
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            if self.convertTextField.text != "" {
-                self.convertLabel.text = String(Double(self.convertTextField.text!)! * DataArray.activeCurrency)
-            }
+        if self.convertTextField.text != "" {
+            self.convertLabel.text = String(Double(self.convertTextField.text!)! * (self.convertPickerView.activeCurrency))
         }
-        dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result:self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
+        dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result: self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
     }
     
     @objc func getInfo() {

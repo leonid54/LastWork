@@ -3,14 +3,12 @@ import SnapKit
 import RealmSwift
 
 protocol IDataBaseView: AnyObject {
-    func setData(model: DataStorage)
 }
 
 final class DataBaseView: UIView {
     private var tableView: UITableView = UITableView()
     let realm = try! Realm()
- // как сделать по-другому???
-    var items: Results<ConversionInfo>! // как сделать по-другому???
+    var items: Results<ConversionInfo>!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,13 +30,6 @@ final class DataBaseView: UIView {
             self.realm.add(task)
         }
     }
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.configure()
-//        self.presenter.onViewReady()
-//        self.items = realm.objects(ConversionInfo.self)
-//    }
-    
 }
 
 private extension DataBaseView {
@@ -113,8 +104,4 @@ extension DataBaseView: UITableViewDataSource {
 }
 
 extension DataBaseView: IDataBaseView {
-
-    func setData(model: DataStorage) {
-//        let realm = model.realm
-    }
 }

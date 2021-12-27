@@ -20,6 +20,5 @@ extension DataBasePresenter: IDataBasePresenter {
     func loadView(controller: DataBaseViewController, view: IDataBaseView) {
         self.controller = controller
         self.view = view
-        self.view?.setData(model: model)
     }
 }

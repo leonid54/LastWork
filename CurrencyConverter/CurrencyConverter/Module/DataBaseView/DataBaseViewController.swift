@@ -16,15 +16,12 @@ final class DataBaseViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        self.view = self.dataBaseView as! UIView
         self.dataBasePresenter.loadView(controller: self, view: self.dataBaseView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Conversion info"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.view.addSubview(dataBaseView as! UIView)
     }
 }

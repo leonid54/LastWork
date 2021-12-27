@@ -28,8 +28,6 @@ final class NetworkService: NSObject, INetworkService {
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(T.self, from: data)
-                    print("[NETWORK] \(response)")
-
                     completion(.success(result))
                 }
                 catch {
