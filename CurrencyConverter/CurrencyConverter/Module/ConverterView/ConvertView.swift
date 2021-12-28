@@ -232,7 +232,7 @@ extension ConvertView: IConvertView {
             self.convertLabel.text = String(Double(self.convertTextField.text!)! * (self.convertPickerView.activeCurrency))
         }
         
-        dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result: self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
+        dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result: self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") 
     }
     
     @objc func getInfo() {
