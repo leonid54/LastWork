@@ -23,7 +23,7 @@ final class ConvertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = l10n("CONVERT_VIEW_CONTROLLER_TITLE")
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = Colors.defaultRedColor
         self.navigationItem.backButtonTitle = l10n("CONVERT_VIEW_CONTROLLER_BACK_BUTTON")
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }

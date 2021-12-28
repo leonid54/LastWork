@@ -43,6 +43,7 @@ final class ConvertView: UIView {
             self?.onTouchHandler?(model)
         }
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -79,43 +80,43 @@ private extension ConvertView {
     }
     
     private func setConfig() {
-        self.backgroundColor = .white
+        self.backgroundColor = Colors.defaultWhiteColor
         
         self.convertTextField.placeholder = l10n("CONVERT_VIEW_CONVERT_TEXT_FIELD")
         self.convertTextField.borderStyle = .roundedRect
                 
         self.convertButton.setTitle(l10n("CONVERT_VIEW_CONVERT_BUTTON"), for: .normal)
         self.convertButton.addTarget(self, action: #selector(self.getConvert), for: .touchDown)
-        self.convertButton.backgroundColor = UIColor(red: 0.929, green: 0.098, blue: 0.192, alpha: 1)
-        self.convertButton.layer.cornerRadius = 15
+        self.convertButton.backgroundColor = Colors.defaultRedColor
+        self.convertButton.layer.cornerRadius = Metrics.convertButtonCornerRadius
 
         self.conversionInfoButton.setTitle(l10n("CONVERT_VIEW_CONVERT_INFO_BUTTON"), for: .normal)
         self.conversionInfoButton.addTarget(self, action: #selector(self.getInfo), for: .touchDown)
-        self.conversionInfoButton.backgroundColor = UIColor(red: 0.557, green: 0.557, blue: 0.576, alpha: 1)
-        self.conversionInfoButton.layer.cornerRadius = 15
+        self.conversionInfoButton.backgroundColor = Colors.defaultGrayColor
+        self.conversionInfoButton.layer.cornerRadius = Metrics.convertButtonCornerRadius
         
         self.convertLabel.text = "0"
         
-        self.toLabel.textColor = .black
+        self.toLabel.textColor = Colors.defaultBlackColor
         self.toLabel.text = l10n("CONVERT_VIEW_TO_LABEL")
         self.toLabel.textAlignment = .center
-        self.toLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
+        self.toLabel.font = Metrics.defaultToLabelFont
         
-        self.baseСurrencyLabel.textColor = .black
+        self.baseСurrencyLabel.textColor = Colors.defaultBlackColor
         self.baseСurrencyLabel.text = l10n("CONVERT_VIEW_BASE_CURRENCY_LABEL")
         self.baseСurrencyLabel.textAlignment = .center
-        self.baseСurrencyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        self.baseСurrencyLabel.font = Metrics.defaultBaseCurrencyLabelFont
         
-        self.conversionСurrencyLabel.textColor = .black
+        self.conversionСurrencyLabel.textColor = Colors.defaultBlackColor
         self.conversionСurrencyLabel.text = l10n("CONVERT_VIEW_CONVERSION_LABEL")
         self.conversionСurrencyLabel.textAlignment = .center
-        self.conversionСurrencyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        self.conversionСurrencyLabel.font = Metrics.defaultBaseCurrencyLabelFont
         
-        self.resultLabel.textColor = .black
+        self.resultLabel.textColor = Colors.defaultBlackColor
         self.resultLabel.text = l10n("CONVERT_VIEW_RESULT_LABEL")
-        self.resultLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.semibold)
+        self.resultLabel.font = Metrics.defaultResultLabelFont
         
-        self.lineView.backgroundColor = UIColor(red: 0.557, green: 0.557, blue: 0.576, alpha: 1)
+        self.lineView.backgroundColor = Colors.defaultGrayColor
     }
     
     private func setConstraint() {
@@ -133,73 +134,73 @@ private extension ConvertView {
         }
         
         self.convertTextField.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(60)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(Metrics.convertTextFieldTop)
+            make.left.equalToSuperview().offset(Metrics.convertLeftConstr)
+            make.right.equalToSuperview().offset(Metrics.convertRightConstr)
         }
         
         self.convertButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.convertTextField.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.height.equalTo(50)
+            make.top.equalTo(self.convertTextField.snp.bottom).offset(Metrics.convertLeftConstr)
+            make.left.equalToSuperview().offset(Metrics.convertLeftConstr)
+            make.right.equalToSuperview().offset(Metrics.convertRightConstr)
+            make.height.equalTo(Metrics.convertHeight)
         }
         
         self.baseСurrencyLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.convertButton.snp.bottom).offset(20)
+            make.top.equalTo(self.convertButton.snp.bottom).offset(Metrics.convertHeight)
             make.left.equalToSuperview()
-            make.width.equalTo(180)
+            make.width.equalTo(Metrics.convertWidth)
         }
         
         self.conversionСurrencyLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.convertButton.snp.bottom).offset(20)
+            make.top.equalTo(self.convertButton.snp.bottom).offset(Metrics.convertHeight)
             make.right.equalToSuperview()
-            make.width.equalTo(180)
+            make.width.equalTo(Metrics.convertWidth)
         }
         
         self.basePickerView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.baseСurrencyLabel.snp.bottom).offset(10)
+            make.top.equalTo(self.baseСurrencyLabel.snp.bottom).offset(Metrics.convertLeftConstr)
             make.left.equalToSuperview()
-            make.width.equalTo(180)
+            make.width.equalTo(Metrics.convertWidth)
         }
         
         self.toLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.baseСurrencyLabel.snp.bottom).offset(105)
-            make.left.equalTo(self.basePickerView.snp.right).offset(5)
-            make.right.equalTo(self.convertPickerView.snp.left).offset(-5)
+            make.top.equalTo(self.baseСurrencyLabel.snp.bottom).offset(Metrics.convertToLabelTop)
+            make.left.equalTo(self.basePickerView.snp.right).offset(Metrics.convertToLabelLeft)
+            make.right.equalTo(self.convertPickerView.snp.left).offset(Metrics.convertToLabelRight)
         }
         
         self.convertPickerView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.baseСurrencyLabel.snp.bottom).offset(10)
+            make.top.equalTo(self.baseСurrencyLabel.snp.bottom).offset(Metrics.convertLeftConstr)
             make.right.equalToSuperview()
-            make.width.equalTo(180)
+            make.width.equalTo(Metrics.convertWidth)
 
         }
         
         self.resultLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.convertPickerView.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
+            make.top.equalTo(self.convertPickerView.snp.bottom).offset(Metrics.convertHeight)
+            make.left.equalToSuperview().offset(Metrics.convertLeftConstr)
+            make.right.equalToSuperview().offset(Metrics.convertRightConstr)
         }
         
         self.convertLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.resultLabel.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
+            make.top.equalTo(self.resultLabel.snp.bottom).offset(Metrics.convertLeftConstr)
+            make.left.equalToSuperview().offset(Metrics.convertLeftConstr)
+            make.right.equalToSuperview().offset(Metrics.convertRightConstr)
         }
         
         self.lineView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.convertLabel.snp.bottom).offset(1)
-            make.left.equalToSuperview().offset(8)
-            make.right.equalToSuperview().offset(-8)
-            make.height.equalTo(1)
+            make.top.equalTo(self.convertLabel.snp.bottom).offset(Metrics.convertDefaultOne)
+            make.left.equalToSuperview().offset(Metrics.convertLineViewLeft)
+            make.right.equalToSuperview().offset(Metrics.convertLineViewRight)
+            make.height.equalTo(Metrics.convertDefaultOne)
         }
         
         self.conversionInfoButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.convertLabel.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.height.equalTo(50)
+            make.top.equalTo(self.convertLabel.snp.bottom).offset(Metrics.convertInfoButtonTop)
+            make.left.equalToSuperview().offset(Metrics.convertLeftConstr)
+            make.right.equalToSuperview().offset(Metrics.convertRightConstr)
+            make.height.equalTo(Metrics.convertButtonHeight)
         }
     }
 }
@@ -219,27 +220,28 @@ extension ConvertView: IConvertView {
     @objc func getConvert() {
         let dataBase = DataBaseView()
 
-        UIView.animate(withDuration: 0.5) {
-            self.convertButton.alpha = 0.5
+        UIView.animate(withDuration: Metrics.convertAnimateDuration) {
+            self.convertButton.alpha = Metrics.convertAnimateAlpha
         }
         
-        UIView.animate(withDuration: 0.5) {
-            self.convertButton.alpha = 1
+        UIView.animate(withDuration: Metrics.convertAnimateDuration) {
+            self.convertButton.alpha = Metrics.convertAnimateAlpha
         }
         
         if self.convertTextField.text != "" {
             self.convertLabel.text = String(Double(self.convertTextField.text!)! * (self.convertPickerView.activeCurrency))
         }
+        
         dataBase.setModel(number: self.convertTextField.text ?? "", base: self.baseModel ?? "error base", result: self.convertLabel.text ?? "nil", convert: self.convertModel ?? "error convert") // сделать красиво
     }
     
     @objc func getInfo() {
-        UIView.animate(withDuration: 0.5) {
-            self.conversionInfoButton.alpha = 0.5
+        UIView.animate(withDuration: Metrics.convertAnimateDuration) {
+            self.conversionInfoButton.alpha = Metrics.convertAnimateAlphaGetInfoFirst
         }
         
-        UIView.animate(withDuration: 0.5) {
-            self.conversionInfoButton.alpha = 1
+        UIView.animate(withDuration: Metrics.convertAnimateDuration) {
+            self.conversionInfoButton.alpha = Metrics.convertAnimateAlpha
         }
         
         self.onInfoButtonHandler?()

@@ -51,7 +51,7 @@ private extension DataBaseView {
     }
     
     private func setConfig() {
-        self.backgroundColor = .white
+        self.backgroundColor = Colors.defaultWhiteColor
         self.tableView.showsVerticalScrollIndicator = false
     }
 

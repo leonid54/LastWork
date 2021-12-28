@@ -9,7 +9,7 @@ final class ConvertPickerView: UIView {
     let pickerView = UIPickerView()
     var onConvertCurrency: ((String) -> Void)?
     private var convertViewModel: DataArray?
-    var activeCurrency: Double = 0.0
+    var activeCurrency: Double = Metrics.defaultActiveCurrency
 
     override init(frame: CGRect) {
         super.init(frame: frame)

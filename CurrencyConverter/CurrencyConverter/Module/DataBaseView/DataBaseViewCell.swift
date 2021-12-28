@@ -26,33 +26,33 @@ private extension DataBaseViewCell {
     
     private func setContent() {
         self.toLabel.text = "="
-        self.toLabel.textColor = .black
+        self.toLabel.textColor = Colors.defaultBlackColor
     }
 
     private func setConstraint() {
         self.numberLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(Metrics.dataBaseCellLeftNumberLabel)
+            make.top.equalToSuperview().offset(Metrics.dataBaseCellTopLabel)
         }
         
         self.baseCurrencyLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.numberLabel.snp.right).offset(2)
-            make.top.equalToSuperview().offset(10)
+            make.left.equalTo(self.numberLabel.snp.right).offset(Metrics.dataBaseCellLeftRightLabel)
+            make.top.equalToSuperview().offset(Metrics.dataBaseCellTopLabel)
         }
         
         self.toLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.baseCurrencyLabel.snp.right).offset(2)
-            make.top.equalToSuperview().offset(10)
+            make.left.equalTo(self.baseCurrencyLabel.snp.right).offset(Metrics.dataBaseCellLeftRightLabel)
+            make.top.equalToSuperview().offset(Metrics.dataBaseCellTopLabel)
         }
         
         self.resultLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.toLabel.snp.right).offset(2)
-            make.top.equalToSuperview().offset(10)
+            make.left.equalTo(self.toLabel.snp.right).offset(Metrics.dataBaseCellLeftRightLabel)
+            make.top.equalToSuperview().offset(Metrics.dataBaseCellTopLabel)
         }
         
         self.conversionCurrencyLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.resultLabel.snp.right).offset(2)
-            make.top.equalToSuperview().offset(10)
+            make.left.equalTo(self.resultLabel.snp.right).offset(Metrics.dataBaseCellLeftRightLabel)
+            make.top.equalToSuperview().offset(Metrics.dataBaseCellTopLabel)
         }
     }
 }

@@ -24,7 +24,6 @@ final class BasePickerView: UIView {
 private extension BasePickerView {
     
     private func configure() {
-        self.setConfig()
         self.addSubviews()
         self.setConstraint()
         self.addDelegate()
@@ -38,11 +37,7 @@ private extension BasePickerView {
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
     }
-    
-    private func setConfig() {
-        
-    }
-    
+
     private func setConstraint() {
         self.pickerView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
